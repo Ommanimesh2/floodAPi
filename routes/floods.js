@@ -12,7 +12,7 @@ router.get('/',(req,res)=>{
    })
 })
 
-router.get('/query', (req, res, next) => {
+router.get('/api/flood', (req, res,next) => {
 
     if (req.query.id) {
         const id = req.query.id;
@@ -44,7 +44,7 @@ router.get('/query', (req, res, next) => {
     }
 });
 // route.put('/api/flood/:id', controller.update);
-router.delete(':id', (req, res ) => {
+router.delete('/api/flood/:id', (req, res ) => {
     const id = req.params.id;
 
    model.findByIdAndDelete(id)
@@ -67,7 +67,7 @@ router.delete(':id', (req, res ) => {
 });
 //Link
  
- router.get('/link',(req, res ) => {
+router.get('/api/link',(req, res ) => {
 
     if (req.query.id) {
         const id = req.query.id;
@@ -99,8 +99,9 @@ router.delete(':id', (req, res ) => {
 
 
 });
- 
-router.delete('/link/:id', (req, res ) => {
+
+
+router.delete('/api/link/:id', (req, res ) => {
     const id = req.params.id;
 
  
@@ -121,8 +122,8 @@ router.delete('/link/:id', (req, res ) => {
         });
      
 });
-//tweet
-router.get('/twit',(req, res ) => {
+//tweet 
+router.get('/api/twit',(req, res ) => {
 
     if (req.query.id) {
         const id = req.query.id;
@@ -154,8 +155,8 @@ router.get('/twit',(req, res ) => {
 
 
 });
- 
-router.delete('/twit/:id', (req, res ) => {
+
+route.delete('/api/twit/:id', (req, res ) => {
     const id = req.params.id;
 
  
@@ -176,4 +177,3 @@ router.delete('/twit/:id', (req, res ) => {
         });
      
 });
-module.exports=router
