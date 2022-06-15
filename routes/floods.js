@@ -156,7 +156,7 @@ router.get('/api/twit',(req, res ) => {
 
 });
 
-route.delete('/api/twit/:id', (req, res ) => {
+router.delete('/api/twit/:id', (req, res ) => {
     const id = req.params.id;
 
  
@@ -177,3 +177,4 @@ route.delete('/api/twit/:id', (req, res ) => {
         });
      
 });
+module.exports=router
