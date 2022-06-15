@@ -4,7 +4,7 @@ const model=require('../models/model')
 
 
 router.get('/',(req,res)=>{
-  model.find().then(e=>{
+  model.find().limit(3).then(e=>{
     res.send(e);
   }).catch(err=>{
     console.log(err);
