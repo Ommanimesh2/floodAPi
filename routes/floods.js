@@ -3,15 +3,20 @@ const router=express.Router();
 const model=require('../models/model')
 
 
-router.get('/',(req,res)=>{
-  model.find({}, {flooddata:0}).then(e=>{
-
-    res.send(e);
-  }).catch(err=>{
-    console.log(err);
-   })
-})
-
+ router.get('/',(req,res)=>{
+   model.find({}, {flooddata:0}).then(e=>{
+     res.send(e);
+   }).catch(err=>{
+     console.log(err);
+    })
+ })
+ router.get('/flooddata',(req,res)=>{
+    model.find({}).limit(1).then(e=>{
+      res.send(e);
+    }).catch(err=>{
+      console.log(err);
+     })
+  })
 router.get('/api/flood', (req, res,next) => {
 
     if (req.query.id) {
