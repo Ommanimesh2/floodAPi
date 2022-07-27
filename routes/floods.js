@@ -36,7 +36,7 @@ router.get('/testing',(req,res)=>{
         "CountryName": req.query.CountryName
         
 
-    }).limit(1).then(e=>{
+    }).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
