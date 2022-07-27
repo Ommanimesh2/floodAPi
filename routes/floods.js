@@ -11,12 +11,66 @@ const model=require('../models/model')
     })
  })
  router.get('/flooddata',(req,res)=>{
-    model.find({}).limit(4).then(e=>{
+     model.find({}).limit(4).then(e=>{
+      res.send(e);
+    }).catch(err=>{
+        console.log(err);
+    })
+})
+router.get('/test',(req,res)=>{
+     var dateStr = new Date(year,month,day,2020,12,22)
+    model.find({"StartDate" : { $gte : new Date("2020-09-12")}}).limit(4).then(e=>{
       res.send(e);
     }).catch(err=>{
       console.log(err);
      })
   })
+router.get('/testing',(req,res)=>{
+    model.find({
+        "StartDate" : {
+            $gte:  req.query.sDate,
+        },
+        "EndDate" : {
+            $lte:  req.query.eDate,
+        },
+        "CountryName": req.query.CountryName
+        
+
+    }).limit(1).then(e=>{
+        console.log(e);
+      res.send(e);
+    }).catch(err=>{
+      console.log(err);
+     })
+  })
+//  router.post('/test',(req,res)=>{
+//     console.log(req.body.StartDate);
+//     model.aggregate([
+//         {
+//           $project: 
+//             {
+//               date2:{
+//                 $dateFromString: {
+//                     dateString: '$date',
+//                     onError: null
+//                 }
+//               }
+//             }
+//         },
+//         {
+//           $match: {
+//             date2:   {
+//               $gte: ISODate(req.body.StartDate),
+//               $lte: ISODate(req.body.EndDate)
+//             }
+//           }
+//         }
+//       ]).then((e)=>{
+//         res.send(e);
+//       }).catch((err)=>[
+//         res.send(err)
+//       ])
+//   })
 router.get('/api/flood', (req, res,next) => {
 
     if (req.query.id) {

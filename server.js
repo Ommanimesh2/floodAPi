@@ -14,5 +14,5 @@ app.use('/api/floods',cors(), Routes)
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.listen(PORT,()=>{
-    console.log("server is up and running");
+    console.log("server is up and running"+PORT);
 })
