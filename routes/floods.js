@@ -25,6 +25,24 @@ router.get('/test',(req,res)=>{
       console.log(err);
      })
   })
+router.get('/testing10',(req,res)=>{
+    model.find({
+        "StartDate" : {
+            $gte:  req.query.sDate,
+        },
+        "EndDate" : {
+            $lte:  req.query.eDate,
+        },
+        "CountryName": req.query.CountryName
+        
+
+    }).limit(10).then(e=>{
+        console.log(e);
+      res.send(e);
+    }).catch(err=>{
+      console.log(err);
+     })
+  })
 router.get('/testing',(req,res)=>{
     model.find({
         "StartDate" : {
