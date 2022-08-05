@@ -33,10 +33,9 @@ router.get('/testing10',(req,res)=>{
         "EndDate" : {
             $lte:  req.query.eDate,
         },
-        "CountryName": req.query.CountryName
-        
-
-    }).limit(10).then(e=>{
+        "CountryName": req.query.CountryName,
+        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
+    }).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
@@ -45,16 +44,11 @@ router.get('/testing10',(req,res)=>{
   })
 router.get('/testing',(req,res)=>{
     model.find({
-        "StartDate" : {
-            $gte:  req.query.sDate,
-        },
-        "EndDate" : {
-            $lte:  req.query.eDate,
-        },
+        
         "CountryName": req.query.CountryName
         
 
-    }).then(e=>{
+    },{flooddata:0}).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
