@@ -35,7 +35,41 @@ router.get('/testing10',(req,res)=>{
         },
         "CountryName": req.query.CountryName,
         $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
-    }).then(e=>{
+    }).sort.then(e=>{
+        console.log(e);
+      res.send(e);
+    }).catch(err=>{
+      console.log(err);
+     })
+  })
+router.get('/testing9',(req,res)=>{
+    model.find({
+        "StartDate" : {
+            $gte:  req.query.sDate,
+        },
+        "EndDate" : {
+            $lte:  req.query.eDate,
+        },
+        "CountryName": req.query.CountryName,
+        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
+    }).sort({"StartDate":-1}).then(e=>{
+        console.log(e);
+      res.send(e);
+    }).catch(err=>{
+      console.log(err);
+     })
+  })
+router.get('/testing8',(req,res)=>{
+    model.find({
+        "StartDate" : {
+            $gte:  req.query.sDate,
+        },
+        "EndDate" : {
+            $lte:  req.query.eDate,
+        },
+        "CountryName": req.query.CountryName,
+        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
+    }).sort({"StartDate":1}).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
