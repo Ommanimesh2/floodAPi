@@ -1,8 +1,9 @@
 const express=require('express')
 const router=express.Router();
 const model=require('../models/model')
-
-
+const Twitdb = require('../models/twitmodel');
+const Weblinkdb = require('../models/weblinkmodel');
+//  /api/floods/
  router.get('/',(req,res)=>{
    model.find({}, {flooddata:0}).then(e=>{
      res.send(e);
@@ -35,7 +36,7 @@ router.get('/testing10',(req,res)=>{
         },
         "CountryName": req.query.CountryName,
         $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
-    }).sort.then(e=>{
+    }).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
@@ -50,9 +51,8 @@ router.get('/testing9',(req,res)=>{
         "EndDate" : {
             $lte:  req.query.eDate,
         },
-        "CountryName": req.query.CountryName,
-        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
-    }).sort({"StartDate":-1}).then(e=>{
+        "CountryName": req.query.CountryName
+    }).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
@@ -68,8 +68,8 @@ router.get('/testing8',(req,res)=>{
             $lte:  req.query.eDate,
         },
         "CountryName": req.query.CountryName,
-        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
-    }).sort({"StartDate":1}).then(e=>{
+        $or:[{"SatelliteName1":req.query.SatelliteName},{"SatelliteName2":req.query.SatelliteName1},{"SatelliteName3":req.query.SatelliteName2},{"SatelliteName4":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
+    }).then(e=>{
         console.log(e);
       res.send(e);
     }).catch(err=>{
@@ -178,7 +178,7 @@ router.get('/api/link',(req, res ) => {
         const id = req.query.id;
 
         
-       weblinkmodel.findById(id)
+       Weblinkdb.findById(id)
             .then(link => {
                 if (!link) {
                     res.status(404).send(errorr)
@@ -192,7 +192,7 @@ router.get('/api/link',(req, res ) => {
             })
 
     } else {
-     weblinkmodel.find()
+        Weblinkdb.find()
             .then(links=> {
                 res.send(links)
             })
@@ -210,7 +210,7 @@ router.delete('/api/link/:id', (req, res ) => {
     const id = req.params.id;
 
  
-    weblinkmodel.findByIdAndDelete(id)
+    Weblinkdb.findByIdAndDelete(id)
         .then(link => {
             if (!link) {
                 res.status(404).send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })
@@ -234,7 +234,7 @@ router.get('/api/twit',(req, res ) => {
         const id = req.query.id;
 
         
-      twitmodel.findById(id)
+      twitDb.findById(id)
             .then(twit => {
                 if (!twit) {
                     res.status(404).send(errorr)
@@ -248,7 +248,7 @@ router.get('/api/twit',(req, res ) => {
             })
 
     } else {
-    twitmodel.find()
+    Twitdb.find()
             .then(twits=> {
                 res.send(twits)
             })
