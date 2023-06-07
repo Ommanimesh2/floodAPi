@@ -35,7 +35,9 @@ function filterObjectsByDatetime(objects, startDatetime, endDatetime) {
 app.get('/weblinks', async (req, res, next) => {
 
     try {
-        const links = await Weblinkdb.find({})
+        const links = await Weblinkdb.find({
+            "CountryName": req.query.CountryName
+        })
         res.send(links)
 
     }
