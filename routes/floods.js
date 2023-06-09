@@ -68,7 +68,7 @@ router.get('/testing8',(req,res)=>{
             $lte:  req.query.eDate,
         },
         "CountryName": req.query.CountryName,
-        $or:[{"SatelliteName1":req.query.SatelliteName},{"SatelliteName2":req.query.SatelliteName1},{"SatelliteName3":req.query.SatelliteName2},{"SatelliteName4":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
+        $or:[{"SatelliteName":req.query.SatelliteName},{"SatelliteName":req.query.SatelliteName1},{"SatelliteName":req.query.SatelliteName2},{"SatelliteName":req.query.SatelliteName3},{"SatelliteName":req.query.SatelliteName4}]
     }).then(e=>{
         console.log(e);
       res.send(e);
